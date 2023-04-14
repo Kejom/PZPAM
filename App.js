@@ -14,10 +14,10 @@ function tabScreenOptions({navigation}) {
   return {
     headerShown: false,
     tabBarStyle: {
-      backgroundColor: GlobalColors.secondaryDark
+      backgroundColor: GlobalColors.primaryDark
     },
-    tabBarActiveTintColor: GlobalColors.accent,
-    tabBarInactiveTintColor: GlobalColors.greyLight
+    tabBarActiveTintColor: GlobalColors.greyLight,
+    tabBarInactiveTintColor: GlobalColors.greyDark
   }
 }
 
@@ -27,7 +27,7 @@ const Tabs = [
     component: MainScreen,
     options: {
       title: 'Main Feed',
-      tabBarLabel: 'Main',
+      tabBarLabel: 'Strona Główna',
       tabBarIcon: ({ color, size }) => <Ionicons name="home" color={color} size={size} />
     }
   },
