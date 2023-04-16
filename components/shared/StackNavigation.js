@@ -8,7 +8,9 @@ export default function StackNavigation({screens}){
         <Stack.Navigator screenOptions={{
             headerStyle: {backgroundColor: GlobalColors.primaryDark},
             headerTintColor: GlobalColors.greyLight,
-            headerTitleAlign: 'center'
+            headerTitleAlign: 'center',
+            animationTypeForReplace: 'push',
+            animation: 'slide_from_right'
         }}>
             {screens.map(screen => <Stack.Screen key={screen.name} {...screen}/>)}
         </Stack.Navigator>

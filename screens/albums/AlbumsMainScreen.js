@@ -16,20 +16,17 @@ const screens = [{
 {
     name: 'AlbumDetails',
     component: AlbumDetailsScreen,
-    options: {
-        presentation: 'modal'
-    }
 },
 {
     name: 'PhotoDetails',
     component: PhotoDetailsScreen,
     options: {
-        presentation: 'modal'
+        presentation: 'modal',
     }
 }]
 
 export default function AlbumsMainScreen(){
-    return  <StackNavigation screens={screens}/>
+    return  <StackNavigation screens={screens} />
 }
 
 const styles = StyleSheet.create({

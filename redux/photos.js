@@ -6,7 +6,7 @@ const photosSlice = createSlice({
         data: []
     },
     reducers: {
-        setPhotos: (state, action) => {state.data = action.payload},
+        setPhotos: (state, action) => {state.data = [...state.data, ...action.payload]},
         addPhoto: (state, action) => {state.data.push(action.payload)},
         updatePhoto: (state, action) => {state.data = [...state.data, action.payload]},
         removePhoto: (state, action) => {state.data = state.data.filter(a => a.id !== action.payload)}

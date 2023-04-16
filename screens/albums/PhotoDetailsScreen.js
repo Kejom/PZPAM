@@ -28,7 +28,6 @@ export default function PhotoDetailsScreen({route, navigation}){
 }
 
 const styles = StyleSheet.create({
-
     container: {
         margin: 8,
         marginTop: 32,
@@ -36,7 +35,8 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         backgroundColor: GlobalColors.lemon,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        elevation: 8
     },
     image: {
         height: 360,

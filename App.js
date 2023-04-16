@@ -22,7 +22,7 @@ function tabScreenOptions({ navigation }) {
       backgroundColor: GlobalColors.primaryDark
     },
     tabBarActiveTintColor: GlobalColors.greyLight,
-    tabBarInactiveTintColor: GlobalColors.primaryLight
+    tabBarInactiveTintColor: GlobalColors.primaryLight,
   }
 }
 
