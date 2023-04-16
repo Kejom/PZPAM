@@ -1,3 +1,10 @@
+## [0.1.0] - 2023-04-14
+  
+### Added
+   - Added ability to browse albums and photos
+### Changed
+ 
+### Fixed
 ## [0.0.2] - 2023-04-14
  
 ### Added

@@ -15,11 +15,17 @@ const screens = [{
 },
 {
     name: 'AlbumDetails',
-    component: AlbumDetailsScreen
+    component: AlbumDetailsScreen,
+    options: {
+        presentation: 'modal'
+    }
 },
 {
     name: 'PhotoDetails',
-    component: PhotoDetailsScreen
+    component: PhotoDetailsScreen,
+    options: {
+        presentation: 'modal'
+    }
 }]
 
 export default function AlbumsMainScreen(){
