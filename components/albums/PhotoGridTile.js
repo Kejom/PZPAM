@@ -26,11 +26,12 @@ const styles = StyleSheet.create({
     gridItem: {
         flex: 1,
         margin: 16,
-
         borderRadius: 8,
         elevation: 4,
         overflow: 'hidden',
-        backgroundColor: GlobalColors.lemon
+        backgroundColor: GlobalColors.lemon,
+        borderWidth: 1,
+        borderColor: GlobalColors.greyDark
     },
     button: {
         flex: 1

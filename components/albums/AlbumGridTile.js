@@ -29,7 +29,9 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         elevation: 4,
         overflow: 'hidden',
-        backgroundColor: GlobalColors.secondaryLight
+        backgroundColor: GlobalColors.secondaryLight,
+        borderWidth: 1,
+        borderColor: GlobalColors.greyDark
     },
     button: {
         flex: 1

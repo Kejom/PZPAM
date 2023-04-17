@@ -73,3 +73,22 @@ export async function putUser(user){
 export async function deleteUser(id){
     await axios.delete(API_URL + `/users/${id}`);
 }
+
+export async function getPosts(){
+    const response = await axios.get(API_URL + '/posts');
+    return response.data;
+}
+
+export async function postPost(post){
+    const response = await axios.post(API_URL + '/posts', post);
+    return response.data;
+}
+
+export async function putPost(post){
+    const response = await axios.put(API_URL + `/posts/${post.id}`, post);
+    return response.data;
+}
+
+export async function deletePost(postId){
+    await axios.delete(API_URL  + `/posts/${postId}`);
+}

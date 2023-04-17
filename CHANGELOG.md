@@ -1,3 +1,10 @@
+## [0.2.0] - 2023-04-14
+  
+### Added
+   - Added ability to browse posts
+### Changed
+ 
+### Fixed
 ## [0.1.0] - 2023-04-14
   
 ### Added
