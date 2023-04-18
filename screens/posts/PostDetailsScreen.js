@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getCommentsByPostId } from "../../clients/jsonPlaceholderClient";
 import { setComments } from "../../redux/comments";
 import { useEffect, useState } from "react";
+import { truncate } from "../../util/stringUtil";
 import Comment from "../../components/posts/Comment";
 import LoadingOverlay from "../../components/shared/LoadingOverlay";
 import { GlobalStyles } from "../../constants/style";
@@ -28,7 +29,10 @@ export default function PostDetailsScreen({route, navigation}){
             setShowLoading(false);
         }
         InitComments();
-    }, [])
+        navigation.setOptions({
+            title: truncate(post.title, 24)
+        })
+    }, [id])
     
     if (showLoading)
     return <LoadingOverlay />
