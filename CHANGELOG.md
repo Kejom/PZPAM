@@ -1,3 +1,10 @@
+## [0.2.1] - 2023-04-14
+  
+### Added
+   - Comments added to posts
+### Changed
+ 
+### Fixed
 ## [0.2.0] - 2023-04-14
   
 ### Added

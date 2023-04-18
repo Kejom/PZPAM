@@ -7,11 +7,14 @@ const usersSlice = createSlice({
         loggedUserId: null
     },
     reducers: {
-        setUsers: (state, action) => {state.data = [...action.payload, ...state.data]},
-        addUser: (state, action) => {state.data.push(action.payload)},
-        updateUser: (state, action) => {state.data = [...state.data, action.payload]},
-        removeUser: (state, action) => {state.data = state.data.filter(a => a.id !== action.payload)},
-        setLoggedUser: (state, action) => {state.loggedUserId = action.payload}
+        setUsers: (state, action) => { state.data = action.payload },
+        addUser: (state, action) => { state.data.push(action.payload) },
+        removeUser: (state, action) => { state.data = state.data.filter(a => a.id !== action.payload) },
+        setLoggedUser: (state, action) => { state.loggedUserId = action.payload },
+        updateUser: (state, action) => {
+            let index = state.data.findIndex(u => u.id === action.payload.id);
+            state.data[index] = action.payload;
+        },
     }
 })
 

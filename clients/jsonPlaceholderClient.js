@@ -92,3 +92,27 @@ export async function putPost(post){
 export async function deletePost(postId){
     await axios.delete(API_URL  + `/posts/${postId}`);
 }
+
+export async function getComments(){
+    const response = await axios.get(API_URL + '/comments');
+    return response.data;
+}
+
+export async function getCommentsByPostId(postId){
+    const response = await axios.get(API_URL + `/post/${postId}/comments`);
+    return response.data;
+}
+
+export async function postComment(comment){
+    const response = await axios.post(API_URL + '/comments', comment);
+    return response.data;
+}
+
+export async function putComment(comment){
+    const response = await axios.put(API_URL + `/comments/${comment.id}`, comment);
+    return response.data;
+}
+
+export async function deleteComment(commentId){
+    await axios.delete(API_URL + `/comments/${comment.id}`)
+}

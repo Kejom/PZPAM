@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
         flex: 1
     },
     container: {
-        backgroundColor: GlobalColors.lemon,
+        backgroundColor: GlobalColors.primaryLight,
         margin: 8,
         borderRadius: 8,
         elevation: 4,
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
         borderWidth: 1
     },
     header: {
-        backgroundColor: GlobalColors.greyLight,
+        backgroundColor: GlobalColors.lemon,
         padding: 8,
         borderTopLeftRadius: 8,
         borderTopRightRadius: 8,

@@ -6,10 +6,13 @@ const postsSlice = createSlice({
         data: []
     },
     reducers: {
-        setPosts: (state, action) => {state.data = [...action.payload, ...state.data]},
-        addPost: (state, action) => {state.data.push(action.payload)},
-        updatePost: (state, action) => {state.data = [...state.data, action.payload]},
-        removePost: (state, action) => {state.data = state.data.filter(a => a.id !== action.payload)}
+        setPosts: (state, action) => { state.data = [...state.data, ...action.payload] },
+        addPost: (state, action) => { state.data.push(action.payload) },
+        removePost: (state, action) => { state.data = state.data.filter(a => a.id !== action.payload) },
+        updatePost: (state, action) => {
+            let index = state.data.findIndex(p => p.id === action.payload.id);
+            state.data[index] = action.payload;
+        },
     }
 })
 

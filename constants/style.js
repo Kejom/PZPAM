@@ -8,6 +8,6 @@ export const GlobalStyles = StyleSheet.create({
     },
     defaultText: {
         textAlign: 'center',
-        color: GlobalColors.greyLight
+        color: GlobalColors.greyDark
     }
 })

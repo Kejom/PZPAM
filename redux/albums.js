@@ -6,10 +6,13 @@ const albumsSlice = createSlice({
         data: []
     },
     reducers: {
-        setAlbums: (state, action) => {state.data = [...action.payload, ...state.data ]},
-        addAlbum: (state, action) => {state.data.push(action.payload)},
-        updateAlbum: (state, action) => {state.data = [...state.data, action.payload]},
-        removeAlbum: (state, action) => {state.data = state.data.filter(a => a.id !== action.payload)}
+        setAlbums: (state, action) => { state.data = [...action.payload, ...state.data] },
+        addAlbum: (state, action) => { state.data.push(action.payload) },
+        removeAlbum: (state, action) => { state.data = state.data.filter(a => a.id !== action.payload) },
+        updateAlbum: (state, action) => {
+            let index = state.data.findIndex(a => a.id === action.payload.id);
+            state.data[index] = action.payload;
+        },
     }
 })
 
