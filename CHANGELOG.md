@@ -1,3 +1,11 @@
+## [0.3.0] - 2023-04-14
+  
+### Added
+   - Login Screen Added
+   - Users now need to log in before using the app
+### Changed
+ 
+### Fixed
 ## [0.2.1] - 2023-04-14
   
 ### Added
