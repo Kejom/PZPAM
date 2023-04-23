@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { deletePost, getPosts, postPost, putPost } from "../clients/jsonPlaceholderClient";
 
 const postsSlice = createSlice({
     name: 'posts',
@@ -6,7 +7,7 @@ const postsSlice = createSlice({
         data: []
     },
     reducers: {
-        setPosts: (state, action) => { state.data = [...state.data, ...action.payload] },
+        setPosts: (state, action) => { state.data = action.payload },
         addPost: (state, action) => { state.data.push(action.payload) },
         removePost: (state, action) => { state.data = state.data.filter(a => a.id !== action.payload) },
         updatePost: (state, action) => {
@@ -16,9 +17,32 @@ const postsSlice = createSlice({
     }
 })
 
-export const setPosts = postsSlice.actions.setPosts;
-export const addPost = postsSlice.actions.addPost;
-export const updatePost = postsSlice.actions.updatePost;
-export const removePost = postsSlice.actions.removePost;
+export function initPosts(){
+    return async function(dispatch, getState){
+        const posts = await getPosts();
+        dispatch(postsSlice.actions.setPosts(posts));
+    }
+}
+
+export function addPost(post){
+    return async function(dispatch, getState){
+        const addedPost = await postPost(post);
+        dispatch(postsSlice.actions.addPost(addedPost));
+    }
+}
+
+export function removePost(id){
+    return async function(dispatch, getState){
+        await deletePost(id);
+        dispatch(postsSlice.actions.removePost(id));
+    }
+}
+
+export function updatePost(post){
+    return async function(dispatch, getState){
+        const updatedpost = await putPost(post);
+        dispatch(postsSlice.actions.updatePost(updatedpost));
+    }
+}
 
 export default postsSlice.reducer;

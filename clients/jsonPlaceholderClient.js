@@ -62,6 +62,7 @@ export async function getUserByUsername(username){
 
 export async function postUser(user){
     const response = await axios.post(API_URL + '/users', user);
+    console.log(response.data);
     return response.data;
 }
 

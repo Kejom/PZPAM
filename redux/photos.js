@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { deletePhoto, getPhotosByAlbumId, postPhoto, putPhoto } from "../clients/jsonPlaceholderClient";
 
 const photosSlice = createSlice({
     name: 'photos',
@@ -16,9 +17,32 @@ const photosSlice = createSlice({
     }
 })
 
-export const setPhotos = photosSlice.actions.setPhotos;
-export const addPhoto = photosSlice.actions.addPhoto;
-export const updatePhoto = photosSlice.actions.updatePhoto;
-export const removePhoto = photosSlice.actions.removePhoto;
+export function InitPhotos(albumId){
+    return async function(dispatch, getState){
+        const photos = await getPhotosByAlbumId(albumId);
+        dispatch(photosSlice.actions.setPhotos(photos));
+    }
+}
+
+export function addPhoto(photo){
+    return async function(dispatch, getState){
+        const addedPhoto = await postPhoto(photo);
+        dispatch(photosSlice.actions.addPhoto(addedPhoto));
+    }
+}
+
+export function removePhoto(id){
+    return async function(dispatch, getState){
+        await deletePhoto(id);
+        dispatch(photosSlice.actions.removePhoto(id));
+    }
+}
+
+export function updatePhoto(photo){
+    return async function(dispatch, getState){
+        const updatedPhoto = await putPhoto();
+        dispatch(photosSlice.actions.updatePhoto(updatedPhoto));
+    }
+}
 
 export default photosSlice.reducer;

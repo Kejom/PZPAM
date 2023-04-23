@@ -1,46 +1,54 @@
+## [0.4.0] - 2023-04-14
+  
+### Dodano
+   - Dodano ekran rejestracji
+   - Użytkownicy są teraz w stanie samodzielnie utworzyć nowe konto i się nim zalogować
+### Zmieniono
+ 
+### Naprawiono
 ## [0.3.0] - 2023-04-14
   
-### Added
-   - Login Screen Added
-   - Users now need to log in before using the app
-### Changed
+### Dodano
+   - Dodano ekran logowania
+   - Użytkownicy teraz muszą się zalogować zanim będą mogli korzystać z aplikacji
+### Zmieniono
  
-### Fixed
+### Naprawiono
 ## [0.2.1] - 2023-04-14
   
-### Added
-   - Comments added to posts
-### Changed
+### Dodano
+   - Dodano komentarze do postów
+### Zmieniono
  
-### Fixed
+### Naprawiono
 ## [0.2.0] - 2023-04-14
   
-### Added
-   - Added ability to browse posts
-### Changed
+### Dodano
+   - Dodano możliwość przeglądania postów
+### Zmieniono
  
-### Fixed
+### Naprawiono
 ## [0.1.0] - 2023-04-14
   
-### Added
-   - Added ability to browse albums and photos
-### Changed
+### Dodano
+   - Dodano funkcjonalność przeglądania albumów oraz zdjęć
+### Zmieniono
  
-### Fixed
+### Naprawiono
 ## [0.0.2] - 2023-04-14
  
-### Added
-   - Added Basic Tab Navigation
-### Changed
+### Dodano
+   - Dodano postawową nawigację
+### Zmieniono
  
-### Fixed
+### Naprawiono
 
 ## [0.0.1] - 2023-04-14
  
-### Added
-   - Created Repository
-   - Added CHANGELOG.md & README.md
-### Changed
+### Dodano
+   - Utworzono repozytorium
+   - Dodano CHANGELOG.md oraz README.md
+### Zmieniono
  
-### Fixed
+### Naprawiono
  

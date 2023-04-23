@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { getCommentsByPostId } from "../../clients/jsonPlaceholderClient";
-import { setComments } from "../../redux/comments";
+import { initComments, setComments } from "../../redux/comments";
 import { useEffect, useState } from "react";
 import { truncate } from "../../util/stringUtil";
 import Comment from "../../components/posts/Comment";
@@ -11,7 +11,7 @@ import { FlatList } from "react-native";
 import { GlobalColors } from "../../constants/colors";
 
 
-export default function PostDetailsScreen({route, navigation}){
+export default function PostDetailsScreen({ route, navigation }) {
     const dispatch = useDispatch();
     const id = route.params.id
     const post = useSelector(state => state.posts.data.find(p => p.id === id));
@@ -20,22 +20,16 @@ export default function PostDetailsScreen({route, navigation}){
     const [showLoading, setShowLoading] = useState(false);
 
     useEffect(() => {
-        async function InitComments(){
-            if(comments.length !== 0)
-                return;
-            setShowLoading(true);
-            let newComments = await getCommentsByPostId(id);
-            dispatch(setComments(newComments));
-            setShowLoading(false);
-        }
-        InitComments();
+        if (!comments.length)
+            dispatch(initComments(id));
+
         navigation.setOptions({
             title: truncate(post.title, 24)
         })
     }, [id])
-    
+
     if (showLoading)
-    return <LoadingOverlay />
+        return <LoadingOverlay />
 
     return (
         <View style={GlobalStyles.defaultContainer}>
@@ -48,9 +42,9 @@ export default function PostDetailsScreen({route, navigation}){
             </View>
             <Text style={GlobalStyles.defaultText}>Comments:</Text>
             <FlatList
-            data={comments}
-            keyExtractor={(item) => item.id}
-            renderItem={({item}) => <Comment {...item}/>} />
+                data={comments}
+                keyExtractor={(item) => item.id}
+                renderItem={({ item }) => <Comment {...item} />} />
         </View>
     )
 }

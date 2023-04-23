@@ -1,4 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { ToastAndroid } from "react-native";
+import { deleteUser, getUsers, postUser, putUser } from "../clients/jsonPlaceholderClient";
 
 const usersSlice = createSlice({
     name: 'users',
@@ -18,10 +20,52 @@ const usersSlice = createSlice({
     }
 })
 
-export const setUsers = usersSlice.actions.setUsers;
-export const addUser = usersSlice.actions.addUser;
-export const updateUser = usersSlice.actions.updateUser;
-export const removeUser = usersSlice.actions.removeUser;
-export const setLoggedUser = usersSlice.actions.setLoggedUser;
+export function initUsers() {
+    return async function (dispatch, getState) {
+        const users = await getUsers();
+        dispatch(usersSlice.actions.setUsers(users));
+    }
+}
+
+export function addUser(user) {
+    return async function (dispatch, getState) {
+        const newUser = await postUser(user);
+        dispatch(usersSlice.actions.addUser(newUser));
+    }
+}
+
+export function removeUser(id) {
+    return async function (dispatch, getState) {
+        await deleteUser(id);
+        dispatch(usersSlice.actions.removeUser(user));
+    }
+}
+
+export function updateUser(user) {
+    return async function (dispatch, getState) {
+        const updatedUser = await putUser(user);
+        dispatch(usersSlice.actions.updateUser(updatedUser));
+    }
+}
+
+export function registerUser(user){
+    return async function (dispatch, getState){
+        await dispatch(addUser(user));
+        await dispatch(setLoggedUser(user.username));
+
+    }
+}
+
+export function setLoggedUser(login) {
+    return async function (dispatch, getState) {
+        const state = getState();
+        const user = state.users.data.find(u => u.username === login)
+
+        if (user)
+            dispatch(usersSlice.actions.setLoggedUser(user.id));
+        else
+            ToastAndroid.showWithGravity("Podano niepoprawną nazwę użytkownika albo hasło", ToastAndroid.LONG, ToastAndroid.TOP)
+    }
+}
 
 export default usersSlice.reducer;

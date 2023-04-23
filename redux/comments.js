@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { deleteComment, getCommentsByPostId, postComment, putComment } from "../clients/jsonPlaceholderClient";
 
 const commentsSlice = createSlice({
     name: 'posts',
@@ -6,7 +7,7 @@ const commentsSlice = createSlice({
         data: []
     },
     reducers: {
-        setComments: (state, action) => {state.data = action.payload},
+        setComments: (state, action) => {state.data = [...state.data, ...action.payload]},
         addComment: (state, action) => {state.data.push(action.payload)},
         removeComment: (state, action) => {state.data = state.data.filter(a => a.id !== action.payload)},
         updateComment: (state, action) => {
@@ -16,9 +17,32 @@ const commentsSlice = createSlice({
     }
 })
 
-export const setComments = commentsSlice.actions.setComments;
-export const addComment = commentsSlice.actions.addComment;
-export const updateComment = commentsSlice.actions.updateComment;
-export const removeComment = commentsSlice.actions.removeComment;
+export function initComments(postId){
+    return async function(dispatch, getState){
+        const comments = await getCommentsByPostId(postId);
+        dispatch(commentsSlice.actions.setComments(comments));
+    }
+}
+
+export function addComment(comment){
+    return async function(dispatch, getState){
+        const addedComment = await postComment(comment);
+        dispatch(commentsSlice.actions.addComment(addedComment));
+    }
+}
+
+export function removeComment(id){
+    return async function(dispatch, getState){
+        await deleteComment(id);
+        dispatch(commentsSlice.actions.removeComment(id));
+    }
+}
+
+export function updateComment(comment){
+    return async function(dispatch, getState){
+        updatedComment = await putComment(comment);
+        dispatch(commentsSlice.actions.updateComment(updatedComment));
+    }
+}
 
 export default commentsSlice.reducer;

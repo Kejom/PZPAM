@@ -3,7 +3,7 @@ import { FlatList, Text, View } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { getUsers, getPosts } from "../../clients/jsonPlaceholderClient";
 import { setUsers } from "../../redux/users";
-import { setPosts } from "../../redux/posts";
+import { initPosts, setPosts } from "../../redux/posts";
 import LoadingOverlay from "../../components/shared/LoadingOverlay";
 import Post from "../../components/posts/Post";
 import { GlobalStyles } from "../../constants/style";
@@ -16,17 +16,8 @@ export default function PostFeedScreen() {
 
 
     useEffect(() => {
-        async function InitPosts() {
-            if (posts.length !== 0)
-                return;
-            setShowLoading(true);
-            let users = await getUsers();
-            let newPosts = await getPosts();
-            dispatch(setUsers(users));
-            dispatch(setPosts(newPosts));
-            setShowLoading(false);
-        }
-        InitPosts();
+        if(!posts.length)
+            dispatch(initPosts());
     }, [])
 
     if (showLoading)

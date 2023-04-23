@@ -1,4 +1,4 @@
-import { View, ToastAndroid } from "react-native";
+import { View } from "react-native";
 import { GlobalStyles } from "../../constants/style";
 import Input from "../../components/shared/Input";
 import Button from "../../components/shared/Button";
@@ -6,8 +6,7 @@ import { StyleSheet } from "react-native";
 import { GlobalColors } from "../../constants/colors";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getUsers } from "../../clients/jsonPlaceholderClient";
-import { setLoggedUser, setUsers } from "../../redux/users";
+import { initUsers, setLoggedUser } from "../../redux/users";
 import { stringIsEmptyOrSpaces } from "../../util/stringUtil";
 
 export default function LoginScreen({ navigation }) {
@@ -26,28 +25,18 @@ export default function LoginScreen({ navigation }) {
     })
 
     useEffect(() => {
-        async function Init() {
-            if (users.length !== 0)
-                return;
-            const newUsers = await getUsers();
-            dispatch(setUsers(newUsers));
-        }
-        Init();
+        if (!users.length)
+            dispatch(initUsers());
     }, [])
 
     function onInputChange(inputId, newValue) {
         setInputs(state => { return { ...state, [inputId]: { value: newValue, isValid: true } } })
     }
     function onLoginPress() {
-        if(!validateInputs())
+        if (!validateInputs())
             return;
 
-        var user = users.find(u => u.username === inputs.login.value);
-
-        if(!user)
-            return ToastAndroid.showWithGravity("Invalid Login or Passowrd", ToastAndroid.LONG, ToastAndroid.TOP)
-        
-        dispatch(setLoggedUser(user.id));
+        dispatch(setLoggedUser(inputs.login.value));
     }
 
     function validateInputs() {
@@ -63,7 +52,7 @@ export default function LoginScreen({ navigation }) {
                 password: { value: state.password.value, isValid: passwordIsValid }
             }
         })
-        
+
         return false;
     }
 

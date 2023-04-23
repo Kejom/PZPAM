@@ -1,4 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { getAlbums, postAlbum, deleteAlbum, putAlbum } from "../clients/jsonPlaceholderClient";
 
 const albumsSlice = createSlice({
     name: 'albums',
@@ -6,7 +7,7 @@ const albumsSlice = createSlice({
         data: []
     },
     reducers: {
-        setAlbums: (state, action) => { state.data = [...action.payload, ...state.data] },
+        setAlbums: (state, action) => { state.data = action.payload },
         addAlbum: (state, action) => { state.data.push(action.payload) },
         removeAlbum: (state, action) => { state.data = state.data.filter(a => a.id !== action.payload) },
         updateAlbum: (state, action) => {
@@ -16,9 +17,32 @@ const albumsSlice = createSlice({
     }
 })
 
-export const setAlbums = albumsSlice.actions.setAlbums;
-export const addAlbum = albumsSlice.actions.addAlbum;
-export const updateAlbum = albumsSlice.actions.updateAlbum;
-export const removeAlbum = albumsSlice.actions.removeAlbum;
+export function initAlbums(){
+    return async function(dispatch, getState){
+        const albums = await getAlbums();
+        dispatch(albumsSlice.actions.setAlbums(albums));
+    }
+}
+
+export function addAlbum(album){
+    return async function(dispatch, getState){
+        const addedAlbum = await postAlbum(album);
+        dispatch(albumsSlice.actions.addAlbum(album));
+    }
+}
+
+export function removeAlbum(id){
+    return async function(dispatch, getState){
+        await deleteAlbum(id);
+        dispatch(albumsSlice.actions.removeAlbum(id));
+    }
+}
+
+export function updateAlbum(album){
+    return async function(dispatch, getState){
+        await putAlbum(album);
+        dispatch(albumsSlice.actions.updateAlbum(album));
+    }
+}
 
 export default albumsSlice.reducer;

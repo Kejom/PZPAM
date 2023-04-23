@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
-import { FlatList, Text, View } from "react-native";
+import { FlatList, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { getPhotosByAlbumId } from "../../clients/jsonPlaceholderClient";
-import { setPhotos } from "../../redux/photos";
 import LoadingOverlay from "../../components/shared/LoadingOverlay";
 import PhotoGridTile from "../../components/albums/PhotoGridTile";
 import { GlobalStyles } from "../../constants/style";
 import { StyleSheet } from "react-native";
 import { GlobalColors } from "../../constants/colors";
+import { InitPhotos } from "../../redux/photos";
 import { truncate } from "../../util/stringUtil";
+
 
 export default function AlbumDetailsScreen({ route, navigation }) {
     const dispatch = useDispatch();
@@ -23,52 +23,45 @@ export default function AlbumDetailsScreen({ route, navigation }) {
 
 
     useEffect(() => {
-        async function initPhotos() {
-            if (photos.length !== 0)
-                return;
-            setShowLoading(true);
-            let newPhotos = await getPhotosByAlbumId(id);
-            dispatch(setPhotos(newPhotos));
-            setShowLoading(false);
-        }
+        if (!photos.length)
+            dispatch(InitPhotos(id))
+
         navigation.setOptions({
-            title: truncate(album.title, 24)
-        })
-        initPhotos();
-    }, [id])
+            title: truncate(album.title, 24)})
+        }, [id])
 
-    if (showLoading)
-        return <LoadingOverlay />
+        if (showLoading)
+            return <LoadingOverlay />
 
 
 
-    return (
-        <View style={GlobalStyles.defaultContainer}>
-            <View style={styles.listContainer}>
-                <FlatList
-                    data={photos}
-                    keyExtractor={item => item.id}
-                    renderItem={({ item }) => <PhotoGridTile {...item} />}
-                    numColumns={2} />
+        return (
+            <View style={GlobalStyles.defaultContainer}>
+                <View style={styles.listContainer}>
+                    <FlatList
+                        data={photos}
+                        keyExtractor={item => item.id}
+                        renderItem={({ item }) => <PhotoGridTile {...item} />}
+                        numColumns={2} />
+                </View>
+
             </View>
-
-        </View>
-    )
-}
+        )
+    }
 
 const styles = StyleSheet.create({
-    albumTitleContainer: {
-        margin: 8,
-        padding: 8,
-        borderRadius: 8,
-        backgroundColor: GlobalColors.lemon
-    },
-    TitleText: {
-        fontSize: 16,
-        fontWeight: 'bold',
-        color: GlobalColors.greyDark,
-        textAlign: 'center'
-    },
-    listContainer: {
-    }
-})
+        albumTitleContainer: {
+            margin: 8,
+            padding: 8,
+            borderRadius: 8,
+            backgroundColor: GlobalColors.lemon
+        },
+        TitleText: {
+            fontSize: 16,
+            fontWeight: 'bold',
+            color: GlobalColors.greyDark,
+            textAlign: 'center'
+        },
+        listContainer: {
+        }
+    })

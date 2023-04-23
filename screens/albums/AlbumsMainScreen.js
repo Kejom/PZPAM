@@ -1,6 +1,3 @@
-import { StyleSheet } from "react-native";
-import { View, Text } from "react-native";
-import { GlobalStyles } from "../../constants/style";
 import AlbumsFeedScreen from "./AlbumsFeedScreen";
 import AlbumDetailsScreen from "./AlbumDetailsScreen";
 import PhotoDetailsScreen from "./PhotoDetailsScreen";
@@ -28,7 +25,3 @@ const screens = [{
 export default function AlbumsMainScreen(){
     return  <StackNavigation screens={screens} />
 }
-
-const styles = StyleSheet.create({
-
-})

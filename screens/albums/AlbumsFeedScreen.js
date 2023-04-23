@@ -1,7 +1,7 @@
 import { View, FlatList } from "react-native";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setAlbums } from "../../redux/albums";
+import { initAlbums} from "../../redux/albums";
 import { getAlbums } from "../../clients/jsonPlaceholderClient";
 import { GlobalStyles } from "../../constants/style";
 import LoadingOverlay from "../../components/shared/LoadingOverlay";
@@ -13,16 +13,11 @@ export default function AlbumsFeedScreen() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        async function initAlbums() {
-            if (albums.length !== 0)
-                return;
-            setShowLoading(true);
-            newAlbums = await getAlbums();
-            dispatch(setAlbums(newAlbums));
-            setShowLoading(false);
-        }
-        initAlbums();
+
+        if(!albums.length)
+            dispatch(initAlbums());
     }, [])
+    
 
     if (showLoading)
         return <LoadingOverlay />
