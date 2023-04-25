@@ -12,10 +12,16 @@ export default function AlbumsFeedScreen() {
     const [showLoading, setShowLoading] = useState(false);
     const dispatch = useDispatch();
 
-    useEffect(() => {
+    async function init(){
+        if(albums.length)
+            return;
 
-        if(!albums.length)
-            dispatch(initAlbums());
+        setShowLoading(true);
+        dispatch(initAlbums());
+        setShowLoading(false);
+    }
+    useEffect(() => {
+        init();
     }, [])
     
 

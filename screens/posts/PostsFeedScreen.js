@@ -7,10 +7,12 @@ import { initPosts, setPosts } from "../../redux/posts";
 import LoadingOverlay from "../../components/shared/LoadingOverlay";
 import Post from "../../components/posts/Post";
 import { GlobalStyles } from "../../constants/style";
+import { initComments } from "../../redux/comments";
 
 export default function PostFeedScreen() {
 
     const posts = useSelector(state => state.posts.data);
+    const shouldInitComments = useSelector(state => state.comments.data.length === 0);
     const [showLoading, setShowLoading] = useState(false);
     const dispatch = useDispatch();
 
@@ -18,6 +20,8 @@ export default function PostFeedScreen() {
     useEffect(() => {
         if(!posts.length)
             dispatch(initPosts());
+        if(shouldInitComments)
+            dispatch(initComments());
     }, [])
 
     if (showLoading)
@@ -28,6 +32,7 @@ export default function PostFeedScreen() {
             <FlatList
                 data={posts}
                 keyExtractor={item => item.id}
+                initialNumToRender={7}
                 renderItem={({ item }) => <Post {...item}/>} />
         </View>
     )

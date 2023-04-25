@@ -13,11 +13,13 @@ export default function Comment({id, name, email , body}){
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        margin: 8,
+        margin: 4,
         padding: 8,
         borderRadius: 8,
         backgroundColor: GlobalColors.primaryLight,
-        elevation: 4,
+        elevation: 8,
+        borderWidth: 1,
+        borderColor: GlobalColors.primaryDark
     },
     header: {
         fontStyle: 'italic',

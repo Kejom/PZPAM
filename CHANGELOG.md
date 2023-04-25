@@ -1,6 +1,13 @@
 ## [0.4.0] - 2023-04-14
   
 ### Dodano
+   - Dodano ekran profilu użytkownika
+### Zmieniono
+ 
+### Naprawiono
+## [0.4.0] - 2023-04-14
+  
+### Dodano
    - Dodano ekran rejestracji
    - Użytkownicy są teraz w stanie samodzielnie utworzyć nowe konto i się nim zalogować
 ### Zmieniono

@@ -48,7 +48,7 @@ const tabs = [
         name: 'UserProfile',
         component: UserProfileScreen,
         options: {
-            title: 'User Profile',
+            title: 'Profil Użytkownika',
             tabBarLabel: 'Profil',
             headerShown: true,
             tabBarIcon: ({ color, size }) => <Ionicons name="person" color={color} size={size} />

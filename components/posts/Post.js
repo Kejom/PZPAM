@@ -1,30 +1,50 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { FlatList, Pressable, StyleSheet, Text, View, LayoutAnimation, Platform, UIManager } from "react-native";
 import { useSelector } from "react-redux";
 import { truncate } from "../../util/stringUtil";
 import { GlobalColors } from "../../constants/colors";
 import { useNavigation } from "@react-navigation/native";
+import { useEffect, useState } from "react";
+import { initComments } from "../../redux/comments";
+import Comment from "./Comment";
 
 
 export default function Post({ userId, id, title, body }) {
+    if(Platform.OS === 'android' && UIManager.setLayoutAnimationEnabledExperimental)
+    UIManager.setLayoutAnimationEnabledExperimental(true);
+
+    const [expanded, setExpanded] = useState(false);
     const author = useSelector(state => state.users.data.find(u => u.id === userId));
-    const navigation = useNavigation();
+    const comments = useSelector(state => state.comments.data.filter(c => c.postId === id));
 
     function onPostPress() {
-        navigation.navigate("PostDetails", {id: id});
+        LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+        setExpanded(state => !state);
     }
 
     return (
-        <Pressable onPress={onPostPress} style={styles.button}>
-            <View style={styles.container}>
-                <View style={styles.header}>
-                    <Text style={styles.authorText}>{author.username} ({author.email})</Text>
-                    <Text style={styles.titleText}>{truncate(title, 40)}</Text>
+        <View style={styles.container}>
+            <Pressable onPress={onPostPress} style={styles.button}>
+                <View >
+                    <View style={styles.header}>
+                        <Text style={styles.authorText}>{author.username} ({author.email})</Text>
+                        <Text style={styles.titleText}>{truncate(title, 40)}</Text>
+                    </View>
+                    <View style={styles.body}>
+                        <Text style={styles.bodyText}>{body}</Text>
+                    </View>
                 </View>
-                <View style={styles.body}>
-                    <Text style={styles.bodyText}>{body}</Text>
-                </View>
-            </View>
-        </Pressable>
+            
+            {expanded &&
+                <View style={styles.commentsContainer}>
+                    <Text style={styles.titleText}>Komentarze:</Text>
+                    <FlatList
+                        data={comments}
+                        keyExtractor={(item) => item.id}
+                        scrollEnabled={false}
+                        renderItem={({ item }) => <Comment {...item} />} />
+                </View>}
+                </Pressable>
+        </View>
     )
 }
 
@@ -33,7 +53,7 @@ const styles = StyleSheet.create({
         flex: 1
     },
     container: {
-        backgroundColor: GlobalColors.primaryLight,
+        backgroundColor: GlobalColors.primary,
         margin: 8,
         borderRadius: 8,
         elevation: 4,
@@ -63,5 +83,8 @@ const styles = StyleSheet.create({
     },
     bodyText: {
         fontSize: 12,
+    },
+    commentsContainer: {
+        padding: 8,
     }
 })

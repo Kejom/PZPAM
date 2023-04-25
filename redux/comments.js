@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { deleteComment, getCommentsByPostId, postComment, putComment } from "../clients/jsonPlaceholderClient";
+import { deleteComment, getComments, getCommentsByPostId, postComment, putComment } from "../clients/jsonPlaceholderClient";
 
 const commentsSlice = createSlice({
     name: 'posts',
@@ -17,9 +17,9 @@ const commentsSlice = createSlice({
     }
 })
 
-export function initComments(postId){
+export function initComments(){
     return async function(dispatch, getState){
-        const comments = await getCommentsByPostId(postId);
+        const comments = await getComments();
         dispatch(commentsSlice.actions.setComments(comments));
     }
 }
