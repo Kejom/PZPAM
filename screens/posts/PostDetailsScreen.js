@@ -1,35 +1,24 @@
 import { StyleSheet, Text, View } from "react-native";
-import { useSelector, useDispatch } from "react-redux";
-import { getCommentsByPostId } from "../../clients/jsonPlaceholderClient";
-import { initComments, setComments } from "../../redux/comments";
+import { useSelector} from "react-redux";
 import { useEffect, useState } from "react";
 import { truncate } from "../../util/stringUtil";
 import Comment from "../../components/posts/Comment";
-import LoadingOverlay from "../../components/shared/LoadingOverlay";
 import { GlobalStyles } from "../../constants/style";
 import { FlatList } from "react-native";
 import { GlobalColors } from "../../constants/colors";
 
 
 export default function PostDetailsScreen({ route, navigation }) {
-    const dispatch = useDispatch();
     const id = route.params.id
     const post = useSelector(state => state.posts.data.find(p => p.id === id));
     const author = useSelector(state => state.users.data.find(u => u.id === post.userId));
     const comments = useSelector(state => state.comments.data.filter(c => c.postId === id));
-    const [showLoading, setShowLoading] = useState(false);
 
     useEffect(() => {
-        if (!comments.length)
-            dispatch(initComments(id));
-
         navigation.setOptions({
             title: truncate(post.title, 24)
         })
     }, [id])
-
-    if (showLoading)
-        return <LoadingOverlay />
 
     return (
         <View style={GlobalStyles.defaultContainer}>

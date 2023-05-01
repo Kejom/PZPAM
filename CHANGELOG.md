@@ -1,4 +1,12 @@
-## [0.4.0] - 2023-04-14
+## [0.6.0] - 2023-05-01
+  
+### Dodano
+   - Dodano mozliwość tworzenia/usuwania/edycji albumów oraz zdjęć
+   - Dodano możliwość tworzenia/usuwania/edycji wpisów oraz komentarzy
+### Zmieniono
+ 
+### Naprawiono
+## [0.5.0] - 2023-04-29
   
 ### Dodano
    - Dodano ekran profilu użytkownika

@@ -9,5 +9,15 @@ export const GlobalStyles = StyleSheet.create({
     defaultText: {
         textAlign: 'center',
         color: GlobalColors.greyDark
+    },
+    defaultModalContainer: {
+        backgroundColor: GlobalColors.primary,
+        padding: 16,
+        marginTop: 100,
+        margin: 10,
+        borderRadius: 8,
+        elevation: 8,
+        borderWidth: 1,
+        borderColor: GlobalColors.primaryDark
     }
 })

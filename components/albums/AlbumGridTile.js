@@ -23,7 +23,7 @@ export default function AlbumGridTile({userId, id, title}){
 
 const styles = StyleSheet.create({
     gridItem: {
-        flex: 1,
+        width: '42%',
         margin: 16,
         height: 150,
         borderRadius: 8,

@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { deletePost, getPosts, postPost, putPost } from "../clients/jsonPlaceholderClient";
+import { setShowLoading } from "./appState";
 
 const postsSlice = createSlice({
     name: 'posts',
@@ -8,7 +9,7 @@ const postsSlice = createSlice({
     },
     reducers: {
         setPosts: (state, action) => { state.data = action.payload },
-        addPost: (state, action) => { state.data.push(action.payload) },
+        addPost: (state, action) => { state.data.unshift(action.payload) },
         removePost: (state, action) => { state.data = state.data.filter(a => a.id !== action.payload) },
         updatePost: (state, action) => {
             let index = state.data.findIndex(p => p.id === action.payload.id);
@@ -19,8 +20,11 @@ const postsSlice = createSlice({
 
 export function initPosts(){
     return async function(dispatch, getState){
+        console.log("gettingPosts");
+        dispatch(setShowLoading(true));
         const posts = await getPosts();
         dispatch(postsSlice.actions.setPosts(posts));
+        dispatch(setShowLoading(false));
     }
 }
 

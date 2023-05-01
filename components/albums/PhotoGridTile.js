@@ -24,7 +24,7 @@ export default function PhotoGridTile({id, title, thumbnailUrl}){
 
 const styles = StyleSheet.create({
     gridItem: {
-        flex: 1,
+        width: '42%',
         margin: 16,
         borderRadius: 8,
         elevation: 4,

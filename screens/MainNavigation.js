@@ -1,5 +1,5 @@
 import { Ionicons } from '@expo/vector-icons'
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native'
 import { GlobalColors } from '../constants/colors';
@@ -7,7 +7,12 @@ import UnauthorizedScreen from './unauthorized/UnauthorizedScreen';
 import AlbumsMainScreen from './albums/AlbumsMainScreen';
 import UserProfileScreen from './UserProfileScreen';
 import PostsScreen from './posts/PostsScreen';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { initAlbums } from '../redux/albums';
+import { initPhotos } from '../redux/photos';
+import { initPosts } from '../redux/posts';
+import { initComments } from '../redux/comments';
+import LoadingOverlay from '../components/shared/LoadingOverlay';
 
 const Tab = createBottomTabNavigator();
 
@@ -58,6 +63,20 @@ const tabs = [
 
 export default function MainNavigation() {
     const currentUserId = useSelector(state => state.users.loggedUserId);
+    const showLoading = useSelector(state => state.appState.showLoading);
+
+    const dispatch = useDispatch();
+
+
+    useEffect(() => {
+        dispatch(initPhotos());
+        dispatch(initAlbums());
+        dispatch(initPosts());
+        dispatch(initComments());
+    }, [])
+
+    if (showLoading)
+        return <LoadingOverlay />
 
     let body = (
         <Tab.Navigator screenOptions={tabScreenOptions}>

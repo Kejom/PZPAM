@@ -6,7 +6,7 @@ export default function Input({label, style, isValid, textInputConfig}){
     return (
         <View style={[styles.inputContainer, style]}>
             <Text style={[styles.label, !isValid && styles.invalidLabel]}>{label}</Text>
-            <TextInput style={[styles.input, !isValid && styles.invalidInput]} {...textInputConfig}/>
+            <TextInput style={[styles.input, !isValid && styles.invalidInput, textInputConfig.multiline && styles.inputMultiline]} {...textInputConfig}/>
         </View>
     )
 }
@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
         fontSize: 18
     },
     inputMultiline: {
-        minHeight: 100,
         textAlignVertical: 'top'
     },
     invalidLabel: {

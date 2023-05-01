@@ -1,39 +1,32 @@
 import { useEffect, useState } from "react";
 import { FlatList, Text, View } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import { getUsers, getPosts } from "../../clients/jsonPlaceholderClient";
-import { setUsers } from "../../redux/users";
-import { initPosts, setPosts } from "../../redux/posts";
-import LoadingOverlay from "../../components/shared/LoadingOverlay";
 import Post from "../../components/posts/Post";
+import IconButton from "../../components/shared/IconButton";
+import AddPostModal from "../../components/posts/AddPostModal";
 import { GlobalStyles } from "../../constants/style";
-import { initComments } from "../../redux/comments";
 
-export default function PostFeedScreen() {
+
+export default function PostFeedScreen({navigation}) {
 
     const posts = useSelector(state => state.posts.data);
-    const shouldInitComments = useSelector(state => state.comments.data.length === 0);
-    const [showLoading, setShowLoading] = useState(false);
-    const dispatch = useDispatch();
+    const [showAddPostModal, setShowAddPostModal] = useState(false);
 
 
     useEffect(() => {
-        if(!posts.length)
-            dispatch(initPosts());
-        if(shouldInitComments)
-            dispatch(initComments());
+        navigation.setOptions({
+            headerRight: () => <IconButton icon="add-circle-outline" size={30} color='white' onPress={() => setShowAddPostModal(true)} />
+        })
     }, [])
-
-    if (showLoading)
-        return <LoadingOverlay />
 
     return (
         <View style={GlobalStyles.defaultContainer}>
             <FlatList
                 data={posts}
-                keyExtractor={item => item.id}
+                keyExtractor={(item, index) => index}
                 initialNumToRender={7}
                 renderItem={({ item }) => <Post {...item}/>} />
+                <AddPostModal isVisible={showAddPostModal} onClose={() => setShowAddPostModal(false)}/>
         </View>
     )
 }

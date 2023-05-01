@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { deletePhoto, getPhotosByAlbumId, postPhoto, putPhoto } from "../clients/jsonPlaceholderClient";
+import { deletePhoto, getPhotos, postPhoto, putPhoto } from "../clients/jsonPlaceholderClient";
+import { setShowLoading } from "./appState";
 
 const photosSlice = createSlice({
     name: 'photos',
@@ -7,9 +8,10 @@ const photosSlice = createSlice({
         data: []
     },
     reducers: {
-        setPhotos: (state, action) => { state.data = [...action.payload, ...state.data] },
-        addPhoto: (state, action) => { state.data.push(action.payload) },
+        setPhotos: (state, action) => { state.data = action.payload},
+        addPhoto: (state, action) => { state.data.unshift(action.payload) },
         removePhoto: (state, action) => { state.data = state.data.filter(a => a.id !== action.payload) },
+        removeByAlbumId: (state, action) => {state.data = state.data.filter(a => a.albumId !== action.payload)},
         updatePhoto: (state, action) => {
             let index = state.data.findIndex(p => p.id === action.payload.id);
             state.data[index] = action.payload;
@@ -17,10 +19,12 @@ const photosSlice = createSlice({
     }
 })
 
-export function InitPhotos(albumId){
+export function initPhotos(){
     return async function(dispatch, getState){
-        const photos = await getPhotosByAlbumId(albumId);
+        dispatch(setShowLoading(true));
+        const photos = await getPhotos();
         dispatch(photosSlice.actions.setPhotos(photos));
+        dispatch(setShowLoading(false));
     }
 }
 
@@ -40,9 +44,11 @@ export function removePhoto(id){
 
 export function updatePhoto(photo){
     return async function(dispatch, getState){
-        const updatedPhoto = await putPhoto();
+        const updatedPhoto = await putPhoto(photo);
         dispatch(photosSlice.actions.updatePhoto(updatedPhoto));
     }
 }
+
+export const removePhotosByAlbumId = photosSlice.actions.removeByAlbumId; 
 
 export default photosSlice.reducer;
