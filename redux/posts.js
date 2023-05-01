@@ -44,8 +44,8 @@ export function removePost(id){
 
 export function updatePost(post){
     return async function(dispatch, getState){
-        const updatedpost = await putPost(post);
-        dispatch(postsSlice.actions.updatePost(updatedpost));
+        //const updatedpost = await putPost(post);
+        dispatch(postsSlice.actions.updatePost(post));
     }
 }
 

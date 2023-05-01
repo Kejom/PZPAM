@@ -1,35 +1,35 @@
-import { View, FlatList } from "react-native";
+import { View, FlatList, TextInput } from "react-native";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { initAlbums } from "../../redux/albums";
-import { getAlbums } from "../../clients/jsonPlaceholderClient";
 import { GlobalStyles } from "../../constants/style";
 import LoadingOverlay from "../../components/shared/LoadingOverlay";
 import AlbumGridTile from "../../components/albums/AlbumGridTile";
 import IconButton from "../../components/shared/IconButton";
 import AddAlbumModal from "../../components/albums/AddAlbumModal";
+import SearchInput from "../../components/shared/SearchInput";
 
 export default function AlbumsFeedScreen({ navigation }) {
-    const albums = useSelector(state => state.albums.data);
+    let albums = useSelector(state => state.albums.data);
+    let users = useSelector(state => state.users.data);
     const [showLoading, setShowLoading] = useState(false);
     const [showAddModal, setShowAddModal] = useState(false);
-    const dispatch = useDispatch();
+    const [searchText, setSearchText] = useState('');
 
-    async function init() {
-        if (albums.length)
-            return;
-
-        setShowLoading(true);
-        await dispatch(initAlbums());
-        setShowLoading(false);
-    }
     useEffect(() => {
-        init();
         navigation.setOptions({
             headerRight: (params) => <IconButton icon="add-circle-outline" size={30} color='white' onPress={() => setShowAddModal(!showAddModal)} />
         })
     }, [])
 
+    function applySearchFilter(){
+        const lowerCaseSearchText = searchText.toLowerCase();
+        const userIds = users.filter(u => u.username.toLowerCase().includes(lowerCaseSearchText)).map(u => u.id);
+        albums = albums.filter(a => a.title.toLowerCase().includes(lowerCaseSearchText) || userIds.includes(a.userId));
+    }
+
+    if(searchText.length > 3)
+        applySearchFilter();
 
 
 
@@ -38,6 +38,7 @@ export default function AlbumsFeedScreen({ navigation }) {
 
     return (
         <View style={GlobalStyles.defaultContainer}>
+            <SearchInput value={searchText} onValueChange={setSearchText}/>
             <FlatList
                 data={albums}
                 keyExtractor={(item, index) => index}

@@ -1,3 +1,11 @@
+## [0.7.0] - 2023-05-01
+  
+### Dodano
+   - Dodano mozliwość filtowania albumów oraz wpisów
+   - Dodano możliwość wylogowania się z aplikacji
+### Zmieniono
+ 
+### Naprawiono
 ## [0.6.0] - 2023-05-01
   
 ### Dodano

@@ -44,8 +44,8 @@ export function removePhoto(id){
 
 export function updatePhoto(photo){
     return async function(dispatch, getState){
-        const updatedPhoto = await putPhoto(photo);
-        dispatch(photosSlice.actions.updatePhoto(updatedPhoto));
+        //const updatedPhoto = await putPhoto(photo);
+        dispatch(photosSlice.actions.updatePhoto(photo));
     }
 }
 

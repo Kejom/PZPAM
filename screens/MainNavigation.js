@@ -13,6 +13,9 @@ import { initPhotos } from '../redux/photos';
 import { initPosts } from '../redux/posts';
 import { initComments } from '../redux/comments';
 import LoadingOverlay from '../components/shared/LoadingOverlay';
+import { Pressable, Text } from 'react-native';
+import { logoutUser} from '../redux/users';
+import { View } from 'react-native';
 
 const Tab = createBottomTabNavigator();
 
@@ -28,6 +31,10 @@ function tabScreenOptions({ navigation }) {
         tabBarActiveTintColor: GlobalColors.greyLight,
         tabBarInactiveTintColor: GlobalColors.primaryLight,
     }
+}
+
+function LogOutComponent(){
+    return null;
 }
 
 const tabs = [
@@ -81,6 +88,18 @@ export default function MainNavigation() {
     let body = (
         <Tab.Navigator screenOptions={tabScreenOptions}>
             {tabs.map(screen => <Tab.Screen key={screen.name} {...screen} />)}
+            <Tab.Screen
+                    name='Logout'
+                    component={LogOutComponent}
+                    options={{
+                        title: 'Wyloguj',
+                        tabBarButton: () => <View style={{paddingHorizontal: 16}}>
+                            <Pressable onPress={() => dispatch(logoutUser())}>
+                            <Ionicons name='log-out-outline' color={GlobalColors.primaryLight} size={30}/>
+                            <Text style={{color: GlobalColors.primaryLight, fontSize: 10}}>Wyloguj</Text>
+                            </Pressable>
+                            </View>
+                    }}/>
         </Tab.Navigator>
     )
 

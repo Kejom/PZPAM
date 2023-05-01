@@ -1,5 +1,5 @@
 import { FlatList, ScrollView, StyleSheet } from "react-native";
-import { View} from "react-native";
+import { View, Text} from "react-native";
 import { GlobalStyles } from "../constants/style";
 import { useSelector } from "react-redux";
 
@@ -24,6 +24,7 @@ export default function UserProfileScreen() {
                     <UserDataForm user={loggedUser}/>
                 </Accordian>
                 <Accordian title="Moje Albumy" style={styles.accordian}>
+                    {!albums.length && <Text style={GlobalStyles.defaultText}>Brak Albumów do wyświetlenia</Text>}
                     <FlatList
                         data={albums}
                         scrollEnabled={false}
@@ -32,6 +33,7 @@ export default function UserProfileScreen() {
                         numColumns={2} />
                 </Accordian>
                 <Accordian title="Moje Posty" style={styles.accordian}>
+                    {!posts.length && <Text style={GlobalStyles.defaultText}>Brak Wpisów do wyświetlenia</Text>}
                 <FlatList
                         data={posts}
                         scrollEnabled={false}

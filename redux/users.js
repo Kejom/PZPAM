@@ -13,6 +13,7 @@ const usersSlice = createSlice({
         addUser: (state, action) => { state.data.push(action.payload) },
         removeUser: (state, action) => { state.data = state.data.filter(a => a.id !== action.payload) },
         setLoggedUser: (state, action) => { state.loggedUserId = action.payload },
+        logOutUser: (state, action) => {state.loggedUserId = null},
         updateUser: (state, action) => {
             let index = state.data.findIndex(u => u.id === action.payload.id);
             state.data[index] = action.payload;
@@ -43,8 +44,8 @@ export function removeUser(id) {
 
 export function updateUser(user) {
     return async function (dispatch, getState) {
-        const updatedUser = await putUser(user);
-        dispatch(usersSlice.actions.updateUser(updatedUser));
+        //const updatedUser = await putUser(user);
+        dispatch(usersSlice.actions.updateUser(user));
     }
 }
 
@@ -67,5 +68,7 @@ export function setLoggedUser(login) {
             ToastAndroid.showWithGravity("Podano niepoprawną nazwę użytkownika albo hasło", ToastAndroid.LONG, ToastAndroid.TOP)
     }
 }
+
+export const logoutUser = usersSlice.actions.logOutUser;
 
 export default usersSlice.reducer;
