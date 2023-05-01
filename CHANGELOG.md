@@ -1,6 +1,13 @@
 ## [0.7.0] - 2023-05-01
   
 ### Dodano
+   - Dodano możliwość edycji profilu użytkownika
+### Zmieniono
+ 
+### Naprawiono
+## [0.7.0] - 2023-05-01
+  
+### Dodano
    - Dodano mozliwość filtowania albumów oraz wpisów
    - Dodano możliwość wylogowania się z aplikacji
 ### Zmieniono

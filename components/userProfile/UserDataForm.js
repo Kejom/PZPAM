@@ -1,7 +1,61 @@
-import { View, Text,  StyleSheet } from "react-native";
+import { View, Text, StyleSheet, ToastAndroid } from "react-native";
 import Input from "../shared/Input";
+import { useState } from "react";
+import Button from "../shared/Button";
+import { updateUser } from "../../redux/users";
+import { useDispatch } from "react-redux";
+import { stringIsEmptyOrSpaces } from "../../util/stringUtil";
 
 export default function UserDataForm({ user }) {
+    const dispatch = useDispatch();
+    const [isDirty, setIsDirty] = useState(false);
+    const [formData, setFormData] = useState({
+        name: { value: user.name, isValid: true },
+        email: { value: user.email, isValid: true },
+        street: { value: user.address.street, isValid: true },
+        suite: { value: user.address.suite, isValid: true },
+        city: { value: user.address.city, isValid: true },
+        zipcode: { value: user.address.city, isValid: true }
+    })
+
+    function onFormChange(key, value) {
+        setFormData(state => { return { ...state, [key]: { value: value, isValid: true } } });
+        setIsDirty(true);
+    }
+
+    function validateForm() {
+        let result = true;
+        let newFormData = {}
+        Object.keys(formData).forEach(key => {
+            newFormData[key] = {
+                value: formData[key].value,
+                isValid: !stringIsEmptyOrSpaces(formData[key].value)
+            }
+
+            if (!newFormData[key].isValid)
+                result = false;
+        })
+        setFormData(newFormData);
+        return result;
+    }
+
+    function onSaveChangesPress(){
+        if(!validateForm())
+            return;
+        
+        const userToUpdate = { ...user};
+
+        userToUpdate.name = formData.name.value;
+        userToUpdate.email = formData.email.value;
+        userToUpdate.address.street = formData.street.value;
+        userToUpdate.address.suite = formData.suite.value;
+        userToUpdate.address.city = formData.city.value;
+        userToUpdate.address.zipcode = formData.zipcode.value;
+
+        dispatch(updateUser(userToUpdate));
+        ToastAndroid.showWithGravity("Dane zostały zaaktualizowane", ToastAndroid.LONG, ToastAndroid.TOP);
+    }
+
     return (
         <View style={styles.container}>
             <Input
@@ -15,67 +69,68 @@ export default function UserDataForm({ user }) {
             />
             <Input
                 label="Imię i Nazwisko:"
-                isValid={true}
+                isValid={formData.name.isValid}
                 textInputConfig={{
                     inputMode: 'text',
-                    value: user.name,
-                    editable: false
+                    value: formData.name.value,
+                    onChangeText: onFormChange.bind(this, 'name')
                 }}
             />
-                        <Input
+            <Input
                 label="Email:"
-                isValid={true}
+                isValid={formData.email.isValid}
                 textInputConfig={{
                     inputMode: 'text',
-                    value: user.email,
-                    editable: false
+                    value: formData.email.value,
+                    onChangeText: onFormChange.bind(this, 'email')
                 }}
             />
             <Text style={styles.header}>Adres:</Text>
             <View style={styles.formRow}>
-                    <Input
+                <Input
                     style={styles.formRowInput}
-                        label="Ulica:"
-                        isValid={true}
-                        textInputConfig={{
-                            inputMode: 'text',
-                            value: user.address.street,
-                            editable: false
-                        }}
-                    />
-                    <Input
+                    label="Ulica:"
+                    isValid={formData.street.isValid}
+                    textInputConfig={{
+                        inputMode: 'text',
+                        value: formData.street.value,
+                        onChangeText: onFormChange.bind(this, 'street')
+                    }}
+                />
+                <Input
                     style={styles.formRowInput}
-                        label="Numer Domu/Mieszkania:"
-                        isValid={true}
-                        textInputConfig={{
-                            inputMode: 'text',
-                            value: user.address.suite,
-                            editable: false
-                        }}
-                    />
-                </View>
-                <View style={styles.formRow}>
-                    <Input
-                        style={styles.formRowInput}
-                        label="Miasto:"
-                        isValid={true}
-                        textInputConfig={{
-                            inputMode: 'text',
-                            value: user.address.city,
-                            editable: false
-                        }}
-                    />
-                    <Input
+                    label="Numer Domu/Mieszkania:"
+                    isValid={formData.suite.isValid}
+                    textInputConfig={{
+                        inputMode: 'text',
+                        value: formData.suite.value,
+                        onChangeText: onFormChange.bind(this, 'suite')
+                    }}
+                />
+            </View>
+            <View style={styles.formRow}>
+                <Input
                     style={styles.formRowInput}
-                        label="Kod Pocztowy:"
-                        isValid={true}
-                        textInputConfig={{
-                            inputMode: 'text',
-                            value: user.address.zipcode,
-                            editable: false
-                        }}
-                    />
-                </View>
+                    label="Miasto:"
+                    isValid={formData.city.isValid}
+                    textInputConfig={{
+                        inputMode: 'text',
+                        value: formData.city.value,
+                        onChangeText: onFormChange.bind(this, 'city')
+                    }}
+                />
+                <Input
+                    style={styles.formRowInput}
+                    label="Kod Pocztowy:"
+                    isValid={formData.zipcode.isValid}
+                    textInputConfig={{
+                        inputMode: 'text',
+                        value: formData.zipcode.value,
+                        editable: false
+                    }}
+                />
+            </View>
+            <Button disabled={!isDirty} onPress={onSaveChangesPress}>Zapisz Zmiany</Button>
         </View>
     )
 }
@@ -94,7 +149,7 @@ const styles = StyleSheet.create({
     formRow: {
         flexDirection: 'row'
     },
-    formRowInput:{
+    formRowInput: {
         flex: 1,
     },
 })

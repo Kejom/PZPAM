@@ -56,7 +56,6 @@ export default function RegisterScreen() {
                 value: inputs[key].value,
                 isValid: !stringIsEmptyOrSpaces(inputs[key].value)
             }
-            inputs[key].isValid = !stringIsEmptyOrSpaces(inputs[key].value);
 
             if(!newInput[key].isValid)
                 result = false;
