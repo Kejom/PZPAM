@@ -15,7 +15,7 @@ export default function UserDataForm({ user }) {
         street: { value: user.address.street, isValid: true },
         suite: { value: user.address.suite, isValid: true },
         city: { value: user.address.city, isValid: true },
-        zipcode: { value: user.address.city, isValid: true }
+        zipcode: { value: user.address.zipcode, isValid: true }
     })
 
     function onFormChange(key, value) {
@@ -126,7 +126,7 @@ export default function UserDataForm({ user }) {
                     textInputConfig={{
                         inputMode: 'text',
                         value: formData.zipcode.value,
-                        editable: false
+                        onChangeText: onFormChange.bind(this, 'zipcode')
                     }}
                 />
             </View>

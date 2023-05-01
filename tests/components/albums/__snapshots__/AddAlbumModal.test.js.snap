@@ -1,0 +1,215 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddAlbumModal renders correctly 1`] = `
+<Modal
+  animationType="slide"
+  hardwareAccelerated={false}
+  onRequestClose={[Function]}
+  transparent={true}
+  visible={true}
+>
+  <View
+    style={
+      {
+        "backgroundColor": "#4CAF50",
+        "borderColor": "#2B702D",
+        "borderRadius": 8,
+        "borderWidth": 1,
+        "elevation": 8,
+        "margin": 10,
+        "marginTop": 100,
+        "padding": 16,
+      }
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "marginHorizontal": 4,
+            "marginVertical": 8,
+          },
+          undefined,
+        ]
+      }
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#58FC5F",
+              "fontSize": 12,
+              "marginBottom": 4,
+            },
+            false,
+          ]
+        }
+      >
+        Tytuł Albumu:
+      </Text>
+      <TextInput
+        inputMode="text"
+        onChangeText={[Function]}
+        style={
+          [
+            {
+              "backgroundColor": "#58FC5F",
+              "borderRadius": 6,
+              "color": "#2B702D",
+              "fontSize": 18,
+              "padding": 6,
+            },
+            false,
+            undefined,
+          ]
+        }
+        value=""
+      />
+    </View>
+    <View
+      style={
+        {
+          "flexDirection": "row",
+        }
+      }
+    >
+      <View
+        style={
+          {
+            "flex": 1,
+            "marginHorizontal": 10,
+          }
+        }
+      >
+        <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={false}
+        >
+          <View
+            style={
+              [
+                {
+                  "backgroundColor": "#2B702D",
+                  "borderRadius": 4,
+                  "padding": 8,
+                },
+                false,
+              ]
+            }
+          >
+            <Text
+              style={
+                [
+                  {
+                    "color": "white",
+                    "textAlign": "center",
+                  },
+                  false,
+                ]
+              }
+            >
+              Stwórz Album
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View
+        style={
+          {
+            "flex": 1,
+            "marginHorizontal": 10,
+          }
+        }
+      >
+        <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={false}
+        >
+          <View
+            style={
+              [
+                {
+                  "backgroundColor": "#2B702D",
+                  "borderRadius": 4,
+                  "padding": 8,
+                },
+                false,
+              ]
+            }
+          >
+            <Text
+              style={
+                [
+                  {
+                    "color": "white",
+                    "textAlign": "center",
+                  },
+                  false,
+                ]
+              }
+            >
+              Anuluj
+            </Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</Modal>
+`;

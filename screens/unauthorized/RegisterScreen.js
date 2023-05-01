@@ -45,7 +45,6 @@ export default function RegisterScreen() {
         };
 
         dispatch(registerUser(user));
-
     }
 
     function validateInputs(){

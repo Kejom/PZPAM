@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { FlatList, Text, View } from "react-native";
-import { useSelector, useDispatch } from "react-redux";
+import { FlatList, View } from "react-native";
+import { useSelector} from "react-redux";
 import Post from "../../components/posts/Post";
 import IconButton from "../../components/shared/IconButton";
 import AddPostModal from "../../components/posts/AddPostModal";

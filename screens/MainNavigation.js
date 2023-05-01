@@ -6,8 +6,8 @@ import { GlobalColors } from '../constants/colors';
 import UnauthorizedScreen from './unauthorized/UnauthorizedScreen';
 import AlbumsMainScreen from './albums/AlbumsMainScreen';
 import UserProfileScreen from './UserProfileScreen';
-import PostsScreen from './posts/PostsScreen';
-import { useEffect, useState } from 'react';
+import PostFeedScreen from './posts/PostsFeedScreen';
+import { useEffect} from 'react';
 import { initAlbums } from '../redux/albums';
 import { initPhotos } from '../redux/photos';
 import { initPosts } from '../redux/posts';
@@ -49,10 +49,11 @@ const tabs = [
     },
     {
         name: 'Posts',
-        component: PostsScreen,
+        component: PostFeedScreen,
         options: {
-            title: 'Wpisy',
+            title: 'Lista Wpisów',
             tabBarLabel: 'Wpisy',
+            headerShown: true,
             tabBarIcon: ({ color, size }) => <Ionicons name="md-chatbox" color={color} size={size} />
         }
     },
