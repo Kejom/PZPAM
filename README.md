@@ -74,6 +74,7 @@ Ekran profilu użytkownika zawiera wszystkie dane na temat aktualnie zalogowaneg
 ![ProfilUżytkownika](https://user-images.githubusercontent.com/44144231/236331453-ce609284-58a4-4e55-9b75-ceb6d8f8558c.png)
 
 Moje dane zawiera dane konta użytkownika oraz pozwala na ich edycję(z wyjątkiem nazwy użytkownika która jest też loginem konta)
+
 ![ProfilDane](https://user-images.githubusercontent.com/44144231/236331613-8acdda6c-f592-4f97-bd5c-d8b8c98c75f8.png)
 
 Moje Albumy oraz Wpisy zawieraja wszystkie Albumy oraz wpisy których autorem/właścicielem jest użytkownik. Użytkownik może bezpośrednio z poziomu tego menu przejść do detali albumu albo rozwinąć wpis w celu zarządzania jego komentarzami.
