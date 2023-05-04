@@ -13,7 +13,8 @@
 ### Dodano
    - Dodano testy
 ### Zmieniono
- 
+  
+### Naprawiono
 ## [0.7.0] - 2023-05-01
   
 ### Dodano
