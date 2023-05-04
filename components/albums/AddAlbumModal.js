@@ -17,6 +17,7 @@ export default function AddAlbumModal({ isVisible, onClose }) {
         
         const newAlbum = {userId: currentUserId, title: albumTitle};
         dispatch(addAlbum(newAlbum));
+        setAlbumTitle("");
         onClose();
     } 
 

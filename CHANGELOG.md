@@ -1,3 +1,13 @@
+## [1.0.0] - 2023-05-04
+
+### Dodano
+   - Dodano readme
+### Zmieniono
+ 
+### Naprawiono
+   - Poprawiono literówki
+   - bug z modalami, dane formularzu nie restowaly sie po zamknieciu
+   
 ## [0.9.0] - 2023-05-01
   
 ### Dodano

@@ -17,7 +17,7 @@ export default function AddCommentForm({loggedUserId, postId}){
         const newComment = {
             postId: postId,
             userId: loggedUserId,
-            name: loggedUser.name,
+            name: loggedUser.username,
             email: loggedUser.email,
             body: newCommentText
         }

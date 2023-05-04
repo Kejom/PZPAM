@@ -20,7 +20,6 @@ const postsSlice = createSlice({
 
 export function initPosts(){
     return async function(dispatch, getState){
-        console.log("gettingPosts");
         dispatch(setShowLoading(true));
         const posts = await getPosts();
         dispatch(postsSlice.actions.setPosts(posts));

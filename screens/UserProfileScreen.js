@@ -32,7 +32,7 @@ export default function UserProfileScreen() {
                         renderItem={({ item }) => <AlbumGridTile {...item} />}
                         numColumns={2} />
                 </Accordian>
-                <Accordian title="Moje Posty" style={styles.accordian}>
+                <Accordian title="Moje Wpisy" style={styles.accordian}>
                     {!posts.length && <Text style={GlobalStyles.defaultText}>Brak Wpisów do wyświetlenia</Text>}
                 <FlatList
                         data={posts}

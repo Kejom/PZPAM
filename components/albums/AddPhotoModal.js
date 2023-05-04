@@ -43,6 +43,10 @@ export default function AddPhotoModal({ isVisible, onClose, albumId }) {
         }
 
         dispatch(addPhoto(newPhoto));
+        setFormData({
+            title: { value: "", isValid: true },
+            url: { value: "", isValid: true }
+        });
         onClose();
     }
 

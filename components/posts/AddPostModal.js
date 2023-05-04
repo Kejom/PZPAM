@@ -45,6 +45,10 @@ export default function AddPostModal({ isVisible, onClose }) {
         }
 
         dispatch(addPost(newPost));
+        setFormData({
+            title: { value: '', isValid: true },
+            body: { value: '', isValid: true }
+        });
         onClose();
     }
     return (
